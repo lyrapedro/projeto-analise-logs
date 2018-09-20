@@ -9,6 +9,13 @@ Vigrant
 fullstack-nanodegree-vm
 newsdata.zip
 
+A máquina virtual (virtual machine)
+Este projeto faz uso da mesma máquina virtual (VM) co base no Linux, como as aulas anteriores.
+
+Se você pulou essas aulas e veio direto para este projeto, não tem problema! No entanto, você precisará voltar para essas instruções para instalar a máquina virtual. Isto lhe dará o banco de dados PostgreSQL e software de suporte necessário para este projeto. Se você usou uma versão antiga dessa VM, ela precisará ser instalada em um novo diretório.
+
+Se você precisa trazer a máquina virtual de volta online (com vagrant up), faça isso agora. Então faça login com vagrant ssh.
+
 Copie e cole os views criado abaixo
 
 #1: Quais os artigos mais populares?
