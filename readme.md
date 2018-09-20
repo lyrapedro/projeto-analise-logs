@@ -3,18 +3,22 @@ Gerar uma resposta, com os dados analisados no banco de dados newsdata.sql, para
 
 Quais os artigos mais populares?
 Quais os autores mais populares?
-Em quais dias mais de 1% das requisições resultaram em erro? #Arquivos necessários
+Em quais dias mais de 1% das requisiÃ§Ãµes resultaram em erro? #Arquivos necessÃ¡rios
 Virtualbox
 Vigrant
 fullstack-nanodegree-vm
 newsdata.zip
 
-A máquina virtual (virtual machine)
-Este projeto faz uso da mesma máquina virtual (VM) co base no Linux, como as aulas anteriores.
+De seu terminal, dentro do subdiretÃ³rio vagrant, execute o comando vagrant up. Isso farÃ¡ com que Vagrant baixe o sistema operacional Linux e instale. Isto pode demorar um pouco (muitos minutos) dependendo do quÃ£o rÃ¡pida Ã© sua conexÃ£o de Internet.Quando "vagrant up" terminar de executar, vocÃª terÃ¡ eu shell prompt de volta. Neste ponto, vocÃª pode executar "vagrant ssh" para logar eu seu Linux VM recentemente instalado!
 
-Se você pulou essas aulas e veio direto para este projeto, não tem problema! No entanto, você precisará voltar para essas instruções para instalar a máquina virtual. Isto lhe dará o banco de dados PostgreSQL e software de suporte necessário para este projeto. Se você usou uma versão antiga dessa VM, ela precisará ser instalada em um novo diretório.
+Para carregar os dados, use o comando psql -d news -f newsdata.sql.
+Eis o que faz este comando:
 
-Se você precisa trazer a máquina virtual de volta online (com vagrant up), faça isso agora. Então faça login com vagrant ssh.
+psql â€” o programa de linha de comando PostgreSQL
+-d news â€” conecta ao banco de dados chamado news que foi criado para vocÃª
+-f newsdata.sql â€” executa as declaraÃ§Ãµes SQL no arquivo newsdata.sql
+Executar esse comando irÃ¡ conectar vocÃª ao seu servidor de banco de dados instalado e executar os comandos SQL no arquivo baixado, criando tabelas e populando-as com dados.
+Se vocÃª precisa trazer a mÃ¡quina virtual de volta online (com vagrant up), faÃ§a isso agora. EntÃ£o faÃ§a login com vagrant ssh.
 
 Copie e cole os views criado abaixo
 
@@ -24,7 +28,7 @@ create view topposts as select articles.title, count(*) as views from articles j
 #2: Quais os autores mais populares?
 create view topauthors as select authors.name, count(*) as views from authors join articles on authors.id = articles.author join log on log.path = CONCAT('/article/', articles.slug) group by name order by views desc;
 
-#3: Em quais dias mais de 1% das requisições resultaram em erro?
+#3: Em quais dias mais de 1% das requisiÃ§Ãµes resultaram em erro?
 
 3.1:
 create view error_requests as select time::date, count(*) as failed_requests from log where status != '200 OK' group by time::date order by failed_requests desc;
